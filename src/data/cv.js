@@ -36,8 +36,7 @@ export const profile = {
   website: null,
   links: {
     linkedin: 'https://www.linkedin.com/in/tomás-alberto-a52b30305',
-    // Agrega tu GitHub aquí y aparecerá en contacto y en la tarjeta
-    github: null,
+    github: 'https://github.com/TomasAlegriaMtz',
   },
 
   // Opcional: pon tu foto en /public (ej. /public/foto.jpg) y escribe '/foto.jpg'
