@@ -470,15 +470,8 @@
   color: var(--graphite);
 }
 
-.thm-badge {
-  display: inline-block;
-  margin-top: 32px;
-}
-
-.thm-badge img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+.thm-profile {
+  text-transform: none;
 }
 
 .term-line--end {

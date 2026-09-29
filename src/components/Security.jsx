@@ -291,33 +291,30 @@ export default function Security() {
               </ul>
             </div>
 
-            <div className="cyber-block" data-reveal>
-              <h3 className="cyber-cmd">
-                <span className="prompt">$</span> {t.toolsCmd}
-              </h3>
-              <ul className="cyber-ls">
-                {security.tools.map((tool, i) => (
-                  <li key={tool} style={{ '--l': i }}>
-                    {tool}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {security.tools.length > 0 && (
+              <div className="cyber-block" data-reveal>
+                <h3 className="cyber-cmd">
+                  <span className="prompt">$</span> {t.toolsCmd}
+                </h3>
+                <ul className="cyber-ls">
+                  {security.tools.map((tool, i) => (
+                    <li key={tool} style={{ '--l': i }}>
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {username && (
-              <a
-                className="thm-badge"
-                href={`https://tryhackme.com/p/${username}`}
-                target="_blank"
-                rel="noreferrer"
-                data-reveal
-              >
-                <img
-                  src={`https://tryhackme-badges.s3.amazonaws.com/${username}.png`}
-                  alt={t.badgeAlt(username)}
-                  loading="lazy"
-                />
-              </a>
+              <div className="cyber-block" data-reveal>
+                <h3 className="cyber-cmd">
+                  <span className="prompt">$</span> open tryhackme.com/p/{username}
+                </h3>
+                <a className="btn btn--ghost thm-profile" href={`https://tryhackme.com/p/${username}`} target="_blank" rel="noreferrer">
+                  {t.profile(platform)} ↗
+                </a>
+              </div>
             )}
           </div>
         </div>

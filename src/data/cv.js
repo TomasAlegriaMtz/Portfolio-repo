@@ -271,13 +271,12 @@ export const skills = [
 
 /* ============================================================================
    🔐  REDES Y CIBERSEGURIDAD
-   Esta sección tiene su propio diseño (terminal). Mientras `example` sea true,
-   se muestra un comentario "# TODO" avisando que son datos de ejemplo:
-   reemplázalos con tus certificados reales de TryHackMe y ponlo en false.
+   Esta sección tiene su propio diseño (terminal). Si algún día pones datos de
+   ejemplo, cambia `example` a true y aparecerá un aviso "# TODO" en la terminal.
    ============================================================================ */
 
 export const security = {
-  example: true,
+  example: false,
 
   intro: {
     en: 'At Línea Italia I also handle IT support, network infrastructure and laptop provisioning, and I train in TryHackMe labs. I want to understand how systems break so I can build and run them more securely.',
@@ -310,16 +309,17 @@ export const security = {
 
   platform: {
     name: 'TryHackMe',
-    // Tu usuario público de TryHackMe: activa tu insignia oficial y el link a tu perfil
-    username: null,
+    // Tu usuario público: activa el link a tu perfil (tryhackme.com/p/usuario)
+    username: 'thalberto04',
   },
 
-  // Los datos de tu perfil público de TryHackMe
+  // Los datos de tu perfil público de TryHackMe (actualízalos cuando subas).
+  // En lugar de la racha va tu nivel: la racha cambia cada día y se quedaría vieja.
   stats: [
-    { label: 'Ranking', value: 'Top 8%' },
-    { label: 'Rooms', value: '64' },
-    { label: { en: 'Badges', es: 'Insignias' }, value: '15' },
-    { label: { en: 'Streak', es: 'Racha' }, value: { en: '21 days', es: '21 días' } },
+    { label: 'Ranking', value: 'Top 30%' },
+    { label: 'Rooms', value: '23' },
+    { label: { en: 'Badges', es: 'Insignias' }, value: '3' },
+    { label: { en: 'Level · Seeker', es: 'Nivel · Seeker' }, value: '0x4' },
   ],
 
   // url: link de verificación del certificado (TryHackMe da uno por certificado)
@@ -328,18 +328,24 @@ export const security = {
   // (en TryHackMe: Profile → Certificates). Cuando empieces otro path, agrégalo con inProgress: true.
   certifications: [{ title: 'Pre Security', kind: 'Learning path', date: null, id: null, url: null }],
 
-  // Se muestra como la salida de un escaneo de nmap: puerto → lo que sabes de ese servicio
+  // Se muestra como la salida de un escaneo de nmap: puerto → lo que sabes de ese servicio.
+  // Solo lo que cubre Pre Security y tu trabajo real; agrega filas conforme avances.
   knowledge: [
-    { port: '22/tcp', service: 'ssh', skill: { en: 'Linux, Bash and remote access', es: 'Linux, Bash y acceso remoto' } },
-    { port: '53/udp', service: 'domain', skill: { en: 'DNS and enumeration', es: 'DNS y enumeración' } },
-    { port: '80/tcp', service: 'http', skill: { en: 'Web security · OWASP Top 10', es: 'Seguridad web · OWASP Top 10' } },
-    { port: '443/tcp', service: 'https', skill: { en: 'TLS and basic cryptography', es: 'TLS y criptografía básica' } },
-    { port: '445/tcp', service: 'microsoft-ds', skill: { en: 'Windows and Active Directory', es: 'Windows y Active Directory' } },
-    { port: '3306/tcp', service: 'mysql', skill: { en: 'SQL injection and databases', es: 'Inyección SQL y bases de datos' } },
+    { port: '22/tcp', service: 'ssh', skill: { en: 'Linux fundamentals and SSH', es: 'Fundamentos de Linux y SSH' } },
+    { port: '53/udp', service: 'domain', skill: { en: 'How DNS works', es: 'Cómo funciona el DNS' } },
+    { port: '67/udp', service: 'dhcps', skill: { en: 'DHCP and LAN basics', es: 'DHCP y redes LAN' } },
+    { port: '80/tcp', service: 'http', skill: { en: 'How the web works: HTTP', es: 'Cómo funciona la web: HTTP' } },
+    { port: '3389/tcp', service: 'ms-wbt-server', skill: { en: 'Windows fundamentals', es: 'Fundamentos de Windows' } },
+    {
+      port: '9100/tcp',
+      service: 'jetdirect',
+      skill: { en: 'Network printer deployment (Línea Italia)', es: 'Instalación de impresoras de red (Línea Italia)' },
+    },
   ],
 
   networking: [{ en: 'OSI model', es: 'Modelo OSI' }, 'TCP/IP', 'Subnetting', 'DHCP', 'Firewalls', 'VPN'],
-  tools: ['nmap', 'wireshark', 'burpsuite', 'metasploit', 'gobuster', 'hydra', 'john'],
+  // Herramientas de seguridad que ya hayas usado (nmap, wireshark…). Vacío = no se muestra.
+  tools: [],
 }
 
 export const education = [

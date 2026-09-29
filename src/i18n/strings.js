@@ -81,7 +81,7 @@ export const strings = {
       progress: 'in progress',
       verifiable: 'verifiable',
       verify: 'verify ↗',
-      badgeAlt: (u) => `TryHackMe public badge for ${u}`,
+      profile: (p) => `View my ${p} profile`,
     },
     education: {
       aria: 'Education, certifications and languages',
@@ -175,7 +175,7 @@ export const strings = {
       progress: 'en curso',
       verifiable: 'verificable',
       verify: 'verificar ↗',
-      badgeAlt: (u) => `Insignia pública de TryHackMe de ${u}`,
+      profile: (p) => `Ver mi perfil de ${p}`,
     },
     education: {
       aria: 'Formación, certificaciones e idiomas',
