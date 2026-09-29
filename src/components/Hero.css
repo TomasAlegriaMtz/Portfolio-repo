@@ -1,0 +1,151 @@
+.hero {
+  position: relative;
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: 128px 96px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.hero-prompt {
+  min-height: 1.6em;
+  font-size: 14px;
+}
+
+.hero-name {
+  display: grid;
+  margin-block: 22px 32px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  /* "ALEGRÍA" mide ~4.2em en monoespaciada */
+  font-size: clamp(3rem, 9.4vw, 8.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  text-shadow: var(--glow);
+  white-space: pre;
+}
+
+.hero-name-line {
+  display: block;
+  color: var(--klein-ink);
+}
+
+.hero-name-line--last {
+  color: var(--ink);
+}
+
+.hero-role {
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.hero-caret {
+  margin-right: 10px;
+  color: var(--graphite);
+}
+
+.hero-intro {
+  max-width: 46ch;
+  margin-top: 14px;
+  color: var(--graphite);
+  text-wrap: pretty;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+/* Secuencia de arranque: cada línea se "imprime" de golpe, en orden */
+.hero .step {
+  visibility: hidden;
+}
+
+.hero[data-ready] .step {
+  animation: print 1ms steps(1) both;
+  animation-delay: calc(var(--s) * 70ms);
+}
+
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  translate: -50% 0;
+  color: var(--graphite);
+  transition: color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-scroll:hover {
+    color: var(--ink);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: auto;
+    padding-block: 112px 88px;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 64px;
+  }
+
+  .hero-card {
+    padding-inline: 8px;
+  }
+
+  .hero-scroll {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .step {
+    visibility: visible;
+    animation: none !important;
+  }
+}
+
+@media print {
+  .hero {
+    min-height: 0;
+    padding-block: 0;
+  }
+
+  .hero-grid {
+    display: block;
+  }
+
+  .hero-prompt {
+    display: none;
+  }
+
+  .hero .step {
+    visibility: visible !important;
+  }
+
+  .hero-name {
+    margin-block: 0 6pt;
+    font-size: 26pt;
+    white-space: normal;
+  }
+
+  .hero-intro {
+    max-width: none;
+  }
+}

@@ -1,0 +1,64 @@
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 150ms ease;
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    background: var(--surface);
+  }
+}
+
+/* Los dos íconos ocupan la misma celda; el cambio se mezcla con blur
+   para que se lea como una sola transformación y no como un reemplazo */
+.theme-icon {
+  grid-area: 1 / 1;
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out),
+    filter 200ms var(--ease-out);
+}
+
+.theme-icon--moon,
+.theme-toggle[data-dark] .theme-icon--sun {
+  opacity: 0;
+  transform: scale(0.6) rotate(-30deg);
+  filter: blur(2px);
+}
+
+.theme-toggle[data-dark] .theme-icon--moon {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-icon {
+    transition: opacity 150ms ease;
+  }
+
+  .theme-icon--moon,
+  .theme-toggle[data-dark] .theme-icon--sun,
+  .theme-toggle[data-dark] .theme-icon--moon {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* View Transition del cambio de tema: el círculo lo anima JS (WAAPI) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

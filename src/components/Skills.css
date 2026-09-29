@@ -1,0 +1,213 @@
+.skills-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 32px;
+}
+
+.tabs-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: -4px;
+  padding: 4px;
+}
+
+.tabs-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 3px;
+  background: var(--surface-2);
+}
+
+.tabs-list {
+  display: flex;
+}
+
+.tab {
+  display: block;
+  padding: 9px 16px;
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--graphite);
+  transition: color 150ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button.tab:hover {
+    color: var(--ink);
+  }
+}
+
+button.tab:focus-visible {
+  outline-offset: -2px;
+  border-radius: 3px;
+}
+
+/* Copia "activa" de la lista: tinta de fondo, texto en papel.
+   Solo se ve el recorte de la pestaña seleccionada. */
+.tabs-overlay {
+  position: absolute;
+  inset: 4px;
+  border-radius: 3px;
+  pointer-events: none;
+  transition: clip-path 260ms var(--ease-in-out);
+}
+
+.tabs-overlay[data-instant] {
+  transition: none;
+}
+
+.tabs-overlay .tabs-list {
+  background: var(--ink);
+  border-radius: 3px;
+}
+
+.tabs-overlay .tab {
+  color: var(--paper);
+}
+
+.skills-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.skills-note-dot,
+.skill[data-proven] .skill-name::before {
+  content: '';
+  display: inline-block;
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--klein-ink);
+}
+
+.skill[data-proven] .skill-name::before {
+  margin-right: 10px;
+  vertical-align: 0.18em;
+}
+
+/* ------------------------------------------------------------ panel */
+
+.skills-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(24px, 3vw, 48px);
+  /* Cambio de contenido: un crossfade corto con blur para que se lea
+     como una sola transformación y no como dos listas encimadas */
+  animation: panel-in 240ms var(--ease-out) both;
+}
+
+.skills-panel[data-instant] {
+  animation: none;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(6px);
+  }
+}
+
+.skill {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 6px 16px;
+  padding-block: 20px 18px;
+  border-top: 1px solid var(--hairline);
+}
+
+.skill-name {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.skill-years {
+  color: var(--graphite);
+  font-size: 11px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.skill-bar {
+  grid-column: 1 / -1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--hairline);
+  overflow: hidden;
+}
+
+.skill-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--klein-ink);
+  transform-origin: left;
+  /* Es un indicador de cantidad: crece desde cero, con un escalonado corto */
+  animation: bar-in 450ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 30ms + 40ms);
+}
+
+.skills-panel[data-instant] .skill-bar > span {
+  animation: none;
+}
+
+@keyframes bar-in {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .skills-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .skills-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tab {
+    padding: 9px 14px;
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-panel {
+    animation-name: fade;
+    animation-duration: 180ms;
+  }
+
+  .skill-bar > span {
+    animation: none;
+  }
+
+  .tabs-overlay {
+    transition: none;
+  }
+}
+
+@media print {
+  .skills-print {
+    display: grid !important;
+    gap: 3pt;
+  }
+}

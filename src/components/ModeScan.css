@@ -1,0 +1,36 @@
+.mode-scan {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* La línea de escaneo es verde al entrar a seguridad y gris al salir:
+   pinta el color del "mundo" al que vas */
+.mode-scan-line {
+  --scan: 57 245 138;
+  position: absolute;
+  inset: 0 0 auto;
+  height: 18vh;
+  transform: translateY(-30vh);
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(var(--scan) / 0.07) 70%,
+    rgb(var(--scan) / 0.5) 97%,
+    rgb(var(--scan))
+  );
+  box-shadow: 0 2px 24px rgb(var(--scan) / 0.55);
+  will-change: transform;
+}
+
+.mode-scan-line[data-exit] {
+  --scan: 205 207 211;
+}
+
+@media print {
+  .mode-scan {
+    display: none;
+  }
+}

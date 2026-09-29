@@ -1,0 +1,164 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+
+.nav[data-scrolled] {
+  background: var(--nav-bg);
+  border-color: var(--hairline);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 68px;
+}
+
+.nav-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Logo del CV. Un poco más grande que la letra: tiene trazos finos */
+.nav-logo {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  color: var(--klein-ink);
+  filter: drop-shadow(0 0 6px rgb(220 222 226 / 0.25));
+}
+
+:root[data-theme='light']:not([data-mode='cyber']) .nav-logo {
+  filter: none;
+}
+
+:root[data-mode='cyber'] .nav-logo {
+  filter: drop-shadow(0 0 6px rgb(57 245 138 / 0.5));
+}
+
+/* Nombre y prompt ocupan la misma celda y se cruzan con blur */
+.nav-label {
+  display: grid;
+}
+
+.nav-name,
+.nav-root {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  transition:
+    opacity 220ms var(--ease-out),
+    filter 220ms var(--ease-out),
+    transform 220ms var(--ease-out);
+}
+
+.nav-root {
+  font-weight: 500;
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateY(6px);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+}
+
+.nav-links a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 3px;
+  color: var(--graphite);
+  font-size: 13px;
+  text-transform: lowercase;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
+}
+
+.nav-links a::before {
+  content: './';
+  opacity: 0.55;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-links a:hover {
+    color: var(--ink);
+    background: var(--surface-2);
+  }
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ------------------------------------------------ modo seguridad */
+
+:root[data-mode='cyber'] .nav {
+  background: var(--nav-bg);
+  border-color: var(--hairline);
+}
+
+:root[data-mode='cyber'] .nav-name {
+  opacity: 0;
+  filter: blur(3px);
+  transform: translateY(-6px);
+}
+
+:root[data-mode='cyber'] .nav-root {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-name,
+  .nav-root {
+    transition: opacity 150ms ease;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+.nav-cv .cv-short {
+  display: none;
+}
+
+@media (max-width: 1060px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-label {
+    display: none;
+  }
+
+  .nav-actions {
+    gap: 6px;
+  }
+
+  .nav-cv .cv-long {
+    display: none;
+  }
+
+  .nav-cv .cv-short {
+    display: inline;
+  }
+}

@@ -1,0 +1,673 @@
+/* ============================================================================
+   Redes y Ciberseguridad
+   Misma terminal que el resto del sitio, pero con fósforo verde.
+   Los tokens verdes viven en global.css (".cyber" y ":root[data-mode='cyber']").
+   ========================================================================== */
+
+.cyber {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(96px, 12vw, 168px);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.cyber ::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.cyber-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------ atmósfera */
+
+.cyber-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+
+.cyber-spot {
+  position: absolute;
+  top: -300px;
+  left: -300px;
+  z-index: 0;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(57 245 138 / 0.12), rgb(57 245 138 / 0.035) 55%, transparent);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------ terminal */
+
+.term {
+  max-width: 760px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: var(--surface-2);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--graphite);
+  font-size: 12px;
+}
+
+.term-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.term-dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--graphite);
+}
+
+.term-body {
+  display: grid;
+  gap: 6px;
+  min-height: 7.5em;
+  padding: 18px 20px 20px;
+  font-size: 14px;
+}
+
+.term-line {
+  overflow-wrap: anywhere;
+}
+
+.term-comment {
+  color: var(--graphite);
+}
+
+.term-badge {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------ encabezado */
+
+.cyber-head {
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.cyber-eyebrow {
+  color: var(--graphite);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cyber-title {
+  display: grid;
+  margin-block: 20px 28px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  /* "CIBERSEGURIDAD" mide ~8.4em en monoespaciada */
+  font-size: clamp(2.2rem, 9.4vw, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-shadow: var(--glow);
+  white-space: pre;
+}
+
+.cyber-title-line {
+  display: block;
+}
+
+.cyber-intro {
+  max-width: 62ch;
+  color: var(--graphite);
+  font-size: 15px;
+}
+
+.cyber-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: clamp(40px, 6vw, 72px);
+  border-block: 1px solid var(--hairline);
+}
+
+.cyber-stat {
+  display: grid;
+  gap: 6px;
+  padding: 22px 20px 22px 0;
+}
+
+.cyber-stat + .cyber-stat {
+  padding-left: 20px;
+  border-left: 1px solid var(--hairline);
+}
+
+.cyber-stat dt {
+  color: var(--graphite);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cyber-stat dd {
+  font-size: clamp(1.6rem, 3.4vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-shadow: var(--glow);
+  white-space: pre;
+}
+
+/* ------------------------------------------------------------ bloques */
+
+.cyber-block {
+  margin-top: clamp(56px, 7vw, 88px);
+}
+
+.cyber-cmd {
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.muted-amber {
+  color: var(--graphite);
+}
+
+/* Certificados como credenciales de acceso */
+.certs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.cert-card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  height: 100%;
+  padding: 22px;
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+  background: var(--surface);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 200ms var(--ease-out);
+}
+
+.cert-corners {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  --c: var(--ink);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 14px 1px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 1px 14px no-repeat;
+}
+
+.cert-top,
+.cert-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--graphite);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cert-status {
+  color: var(--ink);
+}
+
+.cert-card[data-progress] .cert-status {
+  color: var(--graphite);
+}
+
+.cert-title {
+  margin-top: 18px;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-shadow: var(--glow);
+}
+
+.cert-meta {
+  color: var(--graphite);
+  font-size: 13px;
+}
+
+.cert-foot {
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--hairline);
+}
+
+.cert-foot a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cert-card:hover {
+    border-color: rgb(57 245 138 / 0.55);
+    box-shadow: 0 0 32px -8px rgb(57 245 138 / 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+/* Trabajo de campo: el script corriendo */
+.field-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  align-items: start;
+  gap: clamp(24px, 4vw, 56px);
+}
+
+.field-place {
+  color: var(--graphite);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.field-summary {
+  margin-top: 12px;
+  max-width: 48ch;
+}
+
+.field-duties {
+  display: grid;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.field-duties span {
+  color: var(--graphite);
+}
+
+.field-term {
+  max-width: none;
+}
+
+.field-term .term-body {
+  gap: 8px;
+  min-height: 0;
+}
+
+.field-step {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.field-count {
+  flex: none;
+  color: var(--graphite);
+}
+
+.field-text {
+  min-width: 0;
+}
+
+/* Líder de puntos entre el paso y su OK */
+.field-dots {
+  flex: 1;
+  min-width: 16px;
+  border-bottom: 1px dotted var(--hairline);
+  translate: 0 -4px;
+}
+
+.field-ok {
+  flex: none;
+  padding: 0 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.field-done {
+  margin-top: 6px;
+  text-shadow: var(--glow);
+}
+
+/* Cada línea se imprime y su OK llega un momento después, como si el paso
+   de verdad estuviera trabajando. Es explicativo: aquí sí vale ~2s en total. */
+.field .field-line,
+.field .field-ok {
+  visibility: hidden;
+}
+
+.field[data-visible] .field-line {
+  animation: print 1ms steps(1) both;
+  animation-delay: calc(var(--l) * 420ms + 150ms);
+}
+
+.field[data-visible] .field-ok {
+  animation: print 1ms steps(1) both;
+  animation-delay: calc(var(--l) * 420ms + 480ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field .field-line,
+  .field .field-ok {
+    visibility: visible;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* nmap */
+.cyber-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.nmap-scroll {
+  overflow-x: auto;
+}
+
+.nmap {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.nmap th {
+  padding: 0 16px 10px 0;
+  color: var(--graphite);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nmap td {
+  padding: 11px 16px 11px 0;
+  border-top: 1px solid var(--hairline);
+  vertical-align: baseline;
+}
+
+.nmap-port {
+  white-space: nowrap;
+  text-shadow: var(--glow);
+}
+
+.nmap-open {
+  padding: 1px 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.nmap-done {
+  margin-top: 16px;
+  color: var(--graphite);
+  font-size: 13px;
+}
+
+.cyber-side .cyber-block:first-child {
+  margin-top: clamp(56px, 7vw, 88px);
+}
+
+.cyber-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.cyber-ls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 6px 16px;
+}
+
+.cyber-ls li::before {
+  content: '▸ ';
+  color: var(--graphite);
+}
+
+.thm-badge {
+  display: inline-block;
+  margin-top: 32px;
+}
+
+.thm-badge img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.term-line--end {
+  margin-top: clamp(56px, 7vw, 88px);
+  font-size: 14px;
+}
+
+/* ============================================================================
+   Secuencia de arranque
+   1. El comando se escribe letra por letra (JS)
+   2. Al terminar, el título se descifra y el resto "imprime" en orden
+   3. Cada bloque de abajo se imprime al llegar a él con el scroll
+   Como en una terminal real, las líneas aparecen de golpe: sin fundidos.
+   ========================================================================== */
+
+.cyber .step {
+  visibility: hidden;
+}
+
+.cyber[data-ready] .step {
+  animation: print 1ms steps(1) both;
+  animation-delay: calc(var(--s) * 70ms);
+}
+
+/* Los bloques no usan el revelado general (fundido + desplazamiento) */
+.cyber [data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.cyber-block .nmap tbody tr,
+.cyber-block .nmap-done,
+.cyber-block .cyber-chips li,
+.cyber-block .cyber-ls li {
+  visibility: hidden;
+}
+
+.cyber-block[data-visible] .nmap tbody tr,
+.cyber-block[data-visible] .nmap-done,
+.cyber-block[data-visible] .cyber-chips li,
+.cyber-block[data-visible] .cyber-ls li {
+  animation: print 1ms steps(1) both;
+  animation-delay: calc(var(--l) * 80ms + 120ms);
+}
+
+/* Los certificados se "escanean" de izquierda a derecha */
+.cyber-block .cert {
+  clip-path: inset(0 100% 0 0);
+}
+
+.cyber-block[data-visible] .cert {
+  clip-path: inset(-40px);
+  transition: clip-path 560ms var(--ease-out);
+  transition-delay: calc(var(--i) * 80ms + 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber .step,
+  .cyber-block .nmap tbody tr,
+  .cyber-block .nmap-done,
+  .cyber-block .cyber-chips li,
+  .cyber-block .cyber-ls li {
+    visibility: visible;
+    animation: none !important;
+  }
+
+  .cyber-block .cert,
+  .cyber-block[data-visible] .cert {
+    clip-path: none;
+    transition: none;
+  }
+
+  .cert-card {
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .cert-card:hover {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------ responsivo */
+
+@media (max-width: 900px) {
+  .cyber-cols {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .cyber-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cyber-stat:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .cyber-stat:nth-child(n + 3) {
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+@media (max-width: 560px) {
+  .term-size,
+  .col-service {
+    display: none;
+  }
+
+  .term-body {
+    padding: 16px;
+    font-size: 13px;
+  }
+}
+
+/* ------------------------------------------------------------ impresión */
+
+@media print {
+  .cyber {
+    --paper: #fff;
+    --surface: #fff;
+    --ink: #000;
+    --graphite: #444;
+    --hairline: #ccc;
+    --glow: none;
+    padding-block: 18pt 0;
+    font-size: 10pt;
+  }
+
+  .cyber-grid,
+  .cyber-spot,
+  .term,
+  .cyber-stats,
+  .term-line--end,
+  .cursor {
+    display: none !important;
+  }
+
+  .cyber .step,
+  .cyber-block .nmap tbody tr,
+  .cyber-block .nmap-done,
+  .cyber-block .cyber-chips li,
+  .cyber-block .cyber-ls li {
+    visibility: visible !important;
+    animation: none !important;
+  }
+
+  .cyber-block .cert {
+    clip-path: none !important;
+  }
+
+  .cyber-head {
+    margin-top: 0;
+  }
+
+  .cyber-title {
+    margin-block: 4pt 6pt;
+    font-size: 16pt;
+    white-space: normal;
+  }
+
+  .cyber-block {
+    margin-top: 10pt;
+    break-inside: avoid;
+  }
+
+  .certs {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6pt;
+  }
+
+  .cert-card {
+    padding: 6pt;
+  }
+
+  .cert-title {
+    margin-top: 2pt;
+    font-size: 11pt;
+  }
+
+  .cert-corners,
+  .nmap-done {
+    display: none;
+  }
+
+  .cyber-cols {
+    display: block;
+  }
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tomás Alegría — Full-Stack Developer</title>
+    <meta name="description" content="Tomás Alberto Alegría Martínez: full-stack developer (React, Laravel, Node.js) based in Aguascalientes, Mexico. Experience, projects, cybersecurity and contact." />
+    <meta property="og:title" content="Tomás Alegría — Full-Stack Developer" />
+    <meta property="og:description" content="Experience, projects, networking & cybersecurity, and contact." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_MX" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0c0d0f" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Aplica tema e idioma guardados antes de pintar, para evitar parpadeos -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+        var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang')
+        if (l === 'es') document.documentElement.lang = 'es-MX'
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

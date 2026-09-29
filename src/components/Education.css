@@ -1,0 +1,54 @@
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px clamp(24px, 4vw, 56px);
+}
+
+.edu-col .section-rule {
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.edu-list {
+  display: grid;
+  gap: 22px;
+}
+
+.edu-title {
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.edu-detail {
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+.edu-detail .mono {
+  font-size: 11px;
+}
+
+@media (max-width: 760px) {
+  .edu-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media print {
+  .education {
+    padding-top: 18pt;
+  }
+
+  .edu-grid {
+    gap: 12pt;
+  }
+
+  .edu-col .section-rule {
+    margin-bottom: 6pt;
+  }
+
+  .edu-list {
+    gap: 6pt;
+  }
+}

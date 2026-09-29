@@ -1,0 +1,226 @@
+.jobs {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.job {
+  border-top: 1px solid var(--hairline);
+}
+
+.job-head {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr) auto 40px;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding-block: 28px;
+  text-align: left;
+}
+
+.job-period {
+  color: var(--klein-ink);
+}
+
+.job-title {
+  display: grid;
+  gap: 4px;
+}
+
+.job-role {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-shadow: var(--glow);
+}
+
+.job-company {
+  color: var(--graphite);
+}
+
+.job-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px var(--hairline);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    scale 160ms var(--ease-out);
+}
+
+.job-icon .icon {
+  transition: transform 220ms var(--ease-out);
+}
+
+.job[data-open] .job-icon {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: none;
+}
+
+.job[data-open] .job-icon .icon {
+  transform: rotate(45deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .job-head:hover .job-icon {
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+}
+
+.job-head:active .job-icon {
+  scale: 0.95;
+}
+
+/* Acordeón: una de las pocas animaciones que cuestan layout,
+   por eso es corta. Cerrar es más rápido que abrir. */
+.job-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 180ms var(--ease-out);
+}
+
+.job[data-open] .job-body {
+  grid-template-rows: 1fr;
+  transition-duration: 240ms;
+}
+
+.job-body-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding-left: calc(180px + 24px);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity 160ms ease,
+    transform 200ms var(--ease-out);
+}
+
+.job[data-open] .job-body-inner {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 240ms var(--ease-out) 40ms,
+    transform 240ms var(--ease-out) 40ms;
+}
+
+.job[data-instant] .job-body,
+.job[data-instant] .job-body-inner,
+.job[data-instant] .job-icon .icon {
+  transition: none;
+}
+
+.job-summary {
+  max-width: 62ch;
+  font-size: 1.0625rem;
+}
+
+.job-highlights {
+  display: grid;
+  gap: 10px;
+  max-width: 64ch;
+  margin-top: 20px;
+  color: var(--graphite);
+}
+
+.job-highlights li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.job-highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 10px;
+  height: 1px;
+  background: var(--klein-ink);
+}
+
+.job .tags {
+  margin-top: 24px;
+  padding-bottom: 32px;
+}
+
+@media (max-width: 760px) {
+  .job-head {
+    grid-template-columns: minmax(0, 1fr) 40px;
+    gap: 10px 16px;
+    padding-block: 24px;
+  }
+
+  .job-period {
+    grid-column: 1 / -1;
+  }
+
+  .job-duration {
+    display: none;
+  }
+
+  .job-icon {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  .job-body-inner {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-body,
+  .job[data-open] .job-body {
+    transition: none;
+  }
+
+  .job-body-inner,
+  .job[data-open] .job-body-inner {
+    transform: none;
+    transition: opacity 200ms ease;
+  }
+}
+
+@media print {
+  .job {
+    break-inside: avoid;
+  }
+
+  .job-head {
+    grid-template-columns: 90pt minmax(0, 1fr) auto;
+    padding-block: 8pt 4pt;
+  }
+
+  .job-icon {
+    display: none;
+  }
+
+  .job-role {
+    font-size: 12pt;
+  }
+
+  .job-body {
+    grid-template-rows: 1fr !important;
+  }
+
+  .job-body-inner {
+    padding-left: calc(90pt + 24px);
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .job-highlights {
+    margin-top: 4pt;
+    gap: 2pt;
+    color: inherit;
+  }
+
+  .job .tags {
+    margin-top: 6pt;
+    padding-bottom: 8pt;
+  }
+}

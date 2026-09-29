@@ -1,0 +1,43 @@
+.copy-btn {
+  display: inline-grid;
+}
+
+/* Ambos estados ocupan la misma celda: el botón no cambia de ancho
+   y el blur funde un estado con otro en vez de mostrar dos textos encimados */
+.copy-state {
+  grid-area: 1 / 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out),
+    filter 200ms var(--ease-out);
+}
+
+.copy-state--done,
+.copy-btn[data-copied] .copy-state--idle {
+  opacity: 0;
+  transform: scale(0.9);
+  filter: blur(3px);
+}
+
+.copy-btn[data-copied] .copy-state--done {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copy-state {
+    transition: opacity 150ms ease;
+  }
+
+  .copy-state--done,
+  .copy-btn[data-copied] .copy-state--idle,
+  .copy-btn[data-copied] .copy-state--done {
+    transform: none;
+    filter: none;
+  }
+}
